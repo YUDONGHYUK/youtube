@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import styles from "./search_header.module.css";
 
-const Search_header = ({ onSearch }) => {
+const SearchHeader = ({ onSearch }) => {
   const inputRef = useRef();
 
   const handleSearch = () => {
@@ -22,7 +22,7 @@ const Search_header = ({ onSearch }) => {
     <header className={styles.header}>
       <div className={styles.log}>
         <img alt="logo" src="/images/logo.png" className={styles.img} />
-        <h1 className={styles.title}>Youtube</h1>
+        <h1 className={styles.title}>Y0utube</h1>
       </div>
       <input
         ref={inputRef}
@@ -42,4 +42,4 @@ const Search_header = ({ onSearch }) => {
   );
 };
 
-export default Search_header;
+export default SearchHeader;
