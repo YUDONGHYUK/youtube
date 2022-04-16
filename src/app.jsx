@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import styles from "./app.module.css";
 import SearchHeader from "./components/search_header/search_header";
 import VideoDetail from './components/video_detail/vide_detail';
@@ -12,18 +12,20 @@ function App({ youtube }) {
     setSelectedVideo(video)
   }
 
-  const search = (query) => {
+  const search = useCallback((query) => {
     setSelectedVideo(null);
     youtube
-    .search(query) //
-    .then(videos => {
-      setVideos(videos);
-    })
-  };
+      .search(query) //
+      .then(videos => {
+        setVideos(videos);
+      })
+  }, [youtube])
 
   useEffect(() => {
-    youtube.mostPoPular().then(videos => setVideos(videos))
-  }, []);
+    youtube
+      .mostPoPular()
+      .then(videos => setVideos(videos))
+  }, [youtube]);
 
   return (
     <div className={styles.app}>
@@ -36,7 +38,6 @@ function App({ youtube }) {
           <VideoList videos={videos} onVideoClick={selectVideo} display={selectedVideo ? 'list' : 'grid'} />
         </div>
       </section>
-
     </div>
   );
 }
